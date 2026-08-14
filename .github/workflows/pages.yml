@@ -1,0 +1,58 @@
+name: Сборка и публикация превью на GitHub Pages
+
+# Превью-версия сайта для согласования. Боевой домен avto-klass101.ru
+# из этого workflow не затрагивается.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Одновременно выполняется только один деплой; лишние запуски в очереди
+# отменяются, но текущий не прерывается.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Собрать сайт под подпуть Pages
+        working-directory: site
+        env:
+          # Pages отдаёт проект по адресу /<repo>/, поэтому нужен префикс.
+          BASE_PATH: /${{ github.event.repository.name }}
+          # Превью закрыто от индексации, чтобы не конкурировать с боевым доменом.
+          PREVIEW: '1'
+        run: node build.js
+
+      - name: Проверить сборку
+        working-directory: site
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+        run: node scripts/check.js
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

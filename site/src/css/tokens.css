@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Дизайн-токены «Авто-Класс»
+   ========================================================================== */
+
+:root {
+  /* --- Цвет --- */
+  /* Палитра по ТЗ */
+  --color-accent: #F5821F;          /* основной фирменный акцент */
+  --color-accent-strong: #FF6A00;   /* более насыщенный — заливки, иконки, цифры, акцентный текст */
+  --color-accent-text: #FF6A00;
+  --color-accent-ink: #7A3D0E;      /* тёмный — текст на светлой акцентной подложке */
+  --color-accent-rgb: 255, 106, 0;  /* для полупрозрачных подложек и рамок */
+
+  /* Градиент кнопок — между двумя акцентами из ТЗ, сверху вниз,
+     как заливка машины в логотипе. */
+  --gradient-accent: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+
+  --color-ink: #181818;              /* графит — основной текст, тёмные секции */
+  --color-ink-soft: #2A2A28;         /* чуть мягче графита — для крупных тёмных поверхностей */
+  --color-text: #201F1C;             /* основной текст на светлом фоне */
+  --color-text-secondary: #686868;
+  --color-text-on-dark: #F3F1EC;
+  --color-text-on-dark-secondary: #B9B6AE;
+
+  --color-bg: #F7F7F5;               /* тёплый off-white */
+  --color-surface: #FFFFFF;
+  --color-surface-sunken: #F0EFEB;
+  --color-border: #E5E5E1;
+  --color-border-on-dark: #3A3A37;
+
+  --color-success: #2E7D4F;
+  --color-error: #C43B2B;
+
+  /* --- Типографика --- */
+  --font-main: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --fs-h1: clamp(2.25rem, 1.55rem + 3.1vw, 4.5rem);      /* ~36 - 72px */
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.8vw, 3.25rem);     /* ~28 - 52px */
+  --fs-h3: clamp(1.3rem, 1.13rem + 0.7vw, 2rem);         /* ~21 - 32px */
+  --fs-h4: clamp(1.125rem, 1.03rem + 0.4vw, 1.375rem);
+  --fs-body-lg: clamp(1.05rem, 1rem + 0.2vw, 1.125rem);
+  --fs-body: 1rem;
+  --fs-small: 0.9375rem;
+  --fs-micro: 0.8125rem;
+  --fs-stat: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+
+  --lh-tight: 1.08;
+  --lh-heading: 1.18;
+  --lh-body: 1.6;
+
+  --ls-tag: 0.08em;
+
+  /* --- Сетка / контейнер --- */
+  --container-max: 1280px;
+  --container-pad: clamp(20px, 4vw, 64px);
+
+  /* --- Вертикальный ритм --- */
+  --section-gap: clamp(64px, 5vw + 20px, 140px);
+  --section-gap-sm: clamp(48px, 3vw + 20px, 88px);
+  --block-gap: clamp(24px, 2vw, 40px);
+
+  /* --- Радиусы --- */
+  --radius-card: 20px;
+  --radius-card-sm: 16px;
+  --radius-btn: 12px;
+  --radius-pill: 999px;
+  --radius-input: 12px;
+
+  /* --- Тени (минимально) --- */
+  --shadow-sm: 0 1px 2px rgba(24, 24, 24, 0.06);
+  --shadow-card: 0 2px 4px rgba(24, 24, 24, 0.04), 0 12px 28px -16px rgba(24, 24, 24, 0.14);
+  --shadow-pop: 0 16px 40px -12px rgba(24, 24, 24, 0.28);
+
+  /* --- Переходы --- */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --t-fast: 150ms;
+  --t-base: 220ms;
+  --t-slow: 400ms;
+
+  /* --- Header --- */
+  --header-h: 96px;
+  --header-h-scrolled: 64px;
+
+  color-scheme: light;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 78px;
+    --header-h-scrolled: 60px;
+  }
+}

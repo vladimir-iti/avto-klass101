@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Небольшие вариации для посадочных категорий A / B
+   ========================================================================== */
+
+.category-a-page .eyebrow { color: var(--color-accent-text); }
+
+/* .split-fact переехал в components.css — он используется на четырёх
+   страницах, а этот файл подключают не все. */
+
+.steps-list { counter-reset: step; display: flex; flex-direction: column; gap: 0; }
+.steps-list li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  grid-template-areas: "num title" "num desc";
+  align-items: start;
+  column-gap: 18px;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--color-border);
+}
+.steps-list li:last-child { border-bottom: none; }
+.steps-list li::before {
+  grid-area: num;
+  content: counter(step);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface-sunken);
+  color: var(--color-ink);
+  display: grid; place-items: center;
+  font-weight: 700;
+}
+.steps-list h4 { grid-area: title; margin-bottom: 4px; }
+.steps-list p { grid-area: desc; color: var(--color-text-secondary); font-size: var(--fs-small); }
+
+.season-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 28px 30px;
+  border-radius: var(--radius-card);
+  background: linear-gradient(120deg, #FFF4E8, #FFE9D2);
+  border: 1px solid rgba(var(--color-accent-rgb), .22);
+}
+.season-banner__title { font-weight: 700; font-size: 1.125rem; }
+.season-banner__desc { color: var(--color-text-secondary); font-size: var(--fs-small); max-width: 46ch; }

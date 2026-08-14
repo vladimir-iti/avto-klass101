@@ -1,0 +1,18 @@
+# Сборка — генерируется из site/pages + site/src командой `node build.js`.
+# В репозитории не хранится: на Pages её собирает GitHub Actions.
+site/dist/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+
+# Node (на случай, если появятся зависимости)
+node_modules/
+npm-debug.log*

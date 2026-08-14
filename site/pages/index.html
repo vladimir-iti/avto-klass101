@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+{{HEAD_COMMON}}
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
+  <link rel="canonical" href="{{CANONICAL}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Авто-Класс" />
+  <meta property="og:title" content="{{TITLE}}" />
+  <meta property="og:description" content="{{DESCRIPTION}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:url" content="{{OG_URL}}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  {{SCHEMA_JSON}}
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  {{HEADER}}
+  {{MOBILE_NAV}}
+
+  <main id="main">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__content reveal is-visible">
+          <span class="eyebrow">Автошкола в Перми · с 2010 года</span>
+          <h1 class="hero__title">Учим водить так, чтобы сдать с первого раза</h1>
+          <p class="hero__desc">Категории A, B, C, D, BE, CE, DE и тракторная техника — в одной автошколе. Закрытая площадка, автомобили с АКПП и МКПП.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary btn-lg" href="#lead-form" data-open-lead>Записаться на обучение</a>
+            <a class="btn btn-outline btn-lg" href="#directions">Выбрать направление</a>
+          </div>
+          <div class="hero__meta">
+            <span class="hero__meta-item">{{ICON_SHIELD}} Лицензия № 3846, бессрочно</span>
+            <span class="hero__meta-item">{{ICON_PIN}} 2 класса + закрытая площадка</span>
+          </div>
+        </div>
+        <div class="hero__media reveal is-visible">
+          <div class="hero__media-frame" style="aspect-ratio:4/3">
+            <img src="/images/category-b/picanto-side.webp" width="1800" height="1350" alt="Учебный автомобиль Kia Picanto автошколы «Авто-Класс» на площадке" fetchpriority="high" />
+          </div>
+          <div class="hero__badge">
+            <span class="stat-number" style="color:var(--color-accent-strong)">56</span>
+            <span class="hero__badge-label">часов практического вождения на категории B</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ DIRECTIONS =========================== -->
+    <section class="section-pad-lg section-surface" id="directions">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Направления обучения</span>
+          <h2>Выберите свою категорию</h2>
+          <p class="lead">Каждое направление — отдельная программа, свои инструкторы и своя техника.</p>
+        </div>
+
+        <div class="direction-grid">
+          <a class="direction-card reveal" href="/category-b/">
+            <div class="direction-card__media">
+              <img src="/images/category-b/tenet.webp" width="720" height="716" alt="Учебный автомобиль категории B с автоматической коробкой передач" loading="lazy" />
+            </div>
+            <div class="direction-card__body">
+              <span class="direction-card__tag">Категория B</span>
+              <h3 class="direction-card__title">Легковой автомобиль</h3>
+              <p class="direction-card__desc">190/188 часов программы, 56/54 часа вождения. Механика и АКП.</p>
+              <span class="direction-card__link">Подробнее {{ICON_ARROW}}</span>
+            </div>
+          </a>
+
+          <a class="direction-card reveal" href="/category-a/">
+            <div class="direction-card__media">
+              <img src="/images/category-a/motocikl-krasny.webp" width="768" height="1024" alt="Учебный мотоцикл автошколы «Авто-Класс»" loading="lazy" />
+            </div>
+            <div class="direction-card__body">
+              <span class="direction-card__tag">Категория A · A1</span>
+              <h3 class="direction-card__title">Мотоцикл</h3>
+              <p class="direction-card__desc">Обучение на закрытой площадке. Приём с 14 лет на A1.</p>
+              <span class="direction-card__link">Подробнее {{ICON_ARROW}}</span>
+            </div>
+          </a>
+
+          <a class="direction-card reveal" href="/professional/">
+            <div class="direction-card__media">
+              <img src="/images/professional/gaz-next.webp" width="768" height="1024" alt="Учебный грузовой автомобиль ГАЗ Next категории C" loading="lazy" />
+            </div>
+            <div class="direction-card__body">
+              <span class="direction-card__tag">C · D · BE · CE · DE</span>
+              <h3 class="direction-card__title">Профессиональные категории</h3>
+              <p class="direction-card__desc">Грузовики, автобусы, прицепы. Переподготовка между категориями.</p>
+              <span class="direction-card__link">Подробнее {{ICON_ARROW}}</span>
+            </div>
+          </a>
+
+          <a class="direction-card reveal" href="/tractor/">
+            <div class="direction-card__media">
+              <img src="/images/tractor/mtz-loader-3.webp" width="1280" height="720" alt="Учебный трактор с фронтальным погрузчиком на площадке" loading="lazy" />
+            </div>
+            <div class="direction-card__body">
+              <span class="direction-card__tag">Спецтехника</span>
+              <h3 class="direction-card__title">Тракторная техника</h3>
+              <p class="direction-card__desc">Собственный парк: МТЗ, Т-25, ДТ-75 и мотовездеходы.</p>
+              <span class="direction-card__link">Подробнее {{ICON_ARROW}}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ABOUT ============================== -->
+    <section class="section-pad-lg" id="about">
+      <div class="container two-col">
+        <div class="reveal">
+          <span class="eyebrow">Об автошколе</span>
+          <h2 style="margin-top:14px">Одна автошкола на все категории прав</h2>
+          <p class="lead" style="margin-top:18px">Готовим водителей легковых автомобилей, мотоциклов, грузовиков, автобусов и тракторов. Занятия идут в двух учебных классах в Перми.</p>
+
+          <ul class="checklist" style="margin-top:28px">
+            <li>{{ICON_CHECK}}<span>Занятия по вечерам — можно совмещать с работой или учёбой.</span></li>
+            <li>{{ICON_CHECK}}<span>График вождения подстраиваем под вас, а не под общий поток.</span></li>
+            <li>{{ICON_CHECK}}<span>Практика начинается на площадке, в город выезжаем позже.</span></li>
+            <li>{{ICON_CHECK}}<span>Помогаем пройти медкомиссию и собрать документы к экзамену.</span></li>
+          </ul>
+
+          <div class="btn-group" style="margin-top:28px">
+            <a class="btn btn-outline" href="/documents/">Смотреть документы {{ICON_ARROW}}</a>
+          </div>
+        </div>
+
+        <div class="two-col__media reveal">
+          <div class="media-frame" style="aspect-ratio:4/5">
+            <img src="/images/common/klass-3.webp" width="780" height="1040" alt="Учебный класс автошколы «Авто-Класс» с компьютерными местами" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ TRUST GRID =========================== -->
+    <section class="section-pad section-surface">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item reveal">
+            <span class="trust-item__icon">{{ICON_SHIELD}}</span>
+            <span class="trust-item__title">Бессрочная лицензия</span>
+            <span class="trust-item__desc">№ 3846 от 26.02.2015, выдана Госинспекцией по образованию.</span>
+          </div>
+          <div class="trust-item reveal">
+            <span class="trust-item__icon">{{ICON_DOC}}</span>
+            <span class="trust-item__title">Допуск ГИБДД</span>
+            <span class="trust-item__desc">Классы, площадка и автопарк проверены Госавтоинспекцией.</span>
+          </div>
+          <div class="trust-item reveal">
+            <span class="trust-item__icon">{{ICON_CALENDAR}}</span>
+            <span class="trust-item__title">Проверки каждый год</span>
+            <span class="trust-item__desc">Последняя проверка учебной базы прошла в марте 2026 года.</span>
+          </div>
+          <div class="trust-item reveal">
+            <span class="trust-item__icon">{{ICON_GEAR}}</span>
+            <span class="trust-item__title">Договор и документы</span>
+            <span class="trust-item__desc">Заключаем договор, по итогам выдаём документ об обучении.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ INSTRUCTORS ========================== -->
+    <section class="section-pad-lg" id="instructors">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Преподаватели и инструкторы</span>
+          <h2>Люди, которые учат вас вождению</h2>
+          <p class="lead">Теорию ведёт кандидат технических наук, практику — инструкторы по каждой категории.</p>
+        </div>
+
+        <div class="people-grid">
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/dolinov.webp" width="700" height="771" alt="Долинов Дмитрий — преподаватель ПДД" loading="lazy" style="--person-pos:50% 15%" /></div>
+            <div>
+              <div class="person-card__name">Долинов Дмитрий</div>
+              <div class="person-card__role">Преподаватель ПДД</div>
+              <div class="person-card__meta">Кандидат технических наук, ведёт теорию с 2003 года.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/roslyakov.webp" width="700" height="933" alt="Росляков Владимир — инструктор" loading="lazy" style="--person-pos:50% 18%" /></div>
+            <div>
+              <div class="person-card__name">Росляков Владимир</div>
+              <div class="person-card__role">Инструктор, категории C, D, E</div>
+              <div class="person-card__meta">Водительский стаж с 1975 года, работа с прицепами.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/gurov.webp" width="700" height="805" alt="Гуров Алексей — инструктор" loading="lazy" /></div>
+            <div>
+              <div class="person-card__name">Гуров Алексей</div>
+              <div class="person-card__role">Инструктор, категории B и C</div>
+              <div class="person-card__meta">Водительский стаж с 1986 года, в автошколе с 2016.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/hayrullin.webp" width="700" height="797" alt="Хайруллин Василь — инструктор спецтехники" loading="lazy" style="--person-pos:50% 18%" /></div>
+            <div>
+              <div class="person-card__name">Хайруллин Василь</div>
+              <div class="person-card__role">Инструктор спецтехники</div>
+              <div class="person-card__meta">Водительский стаж с 1995 года, тракторы и погрузчики.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/dvoynin.webp" width="700" height="821" alt="Двойнин Юрий — инструктор" loading="lazy" style="--person-pos:50% 12%" /></div>
+            <div>
+              <div class="person-card__name">Двойнин Юрий</div>
+              <div class="person-card__role">Инструктор, категории A—CE</div>
+              <div class="person-card__meta">Водительский стаж с 1997 года, открыто 12 категорий.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/shilov.webp" width="462" height="457" alt="Шилов Станислав — инструктор" loading="lazy" style="--person-pos:50% 25%" /></div>
+            <div>
+              <div class="person-card__name">Шилов Станислав</div>
+              <div class="person-card__role">Инструктор, категории A, B, C</div>
+              <div class="person-card__meta">Водительский стаж с 2002 года, открыта и категория E.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/vavilov.webp" width="477" height="560" alt="Вавилов Алексей — инструктор" loading="lazy" style="--person-pos:50% 15%" /></div>
+            <div>
+              <div class="person-card__name">Вавилов Алексей</div>
+              <div class="person-card__role">Инструктор, категория B</div>
+              <div class="person-card__meta">Водительский стаж с 2011 года, в автошколе с 2013.</div>
+            </div>
+          </div>
+          <div class="person-card reveal">
+            <div class="person-card__photo"><img src="/images/instructors/galichenko.webp" width="593" height="1165" alt="Галиченко Виктор — преподаватель и инструктор" loading="lazy" style="--person-pos:50% 12%" /></div>
+            <div>
+              <div class="person-card__name">Галиченко Виктор</div>
+              <div class="person-card__role">Преподаватель и инструктор</div>
+              <div class="person-card__meta">Водительский стаж с 2017 года, теория и практика.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== FLEET ============================= -->
+    <section class="section-pad-lg section-surface" id="fleet">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Автопарк</span>
+          <h2>На чём вы будете учиться</h2>
+          <p class="lead">11 легковых автомобилей, 2 грузовика, 2 автобуса, 4 мотоцикла и 3 прицепа.</p>
+        </div>
+
+        <div class="gallery-grid cols-4">
+          <div class="gallery-item reveal">
+            <img src="/images/category-b/tenet.webp" width="720" height="716" alt="TENET — учебный автомобиль с АКП" loading="lazy" />
+            <span class="gallery-item__caption">TENET · АКП</span>
+          </div>
+          <div class="gallery-item reveal">
+            <img src="/images/category-b/picanto-side.webp" width="1800" height="1350" alt="Kia Picanto — учебный автомобиль" loading="lazy" />
+            <span class="gallery-item__caption">Kia Picanto · АКП</span>
+          </div>
+          <div class="gallery-item reveal">
+            <img src="/images/professional/peugeot-boxer.webp" width="1024" height="768" alt="Peugeot Boxer — учебный автобус категории D" loading="lazy" />
+            <span class="gallery-item__caption">Peugeot Boxer · D</span>
+          </div>
+          <div class="gallery-item reveal">
+            <img src="/images/category-a/motocikl-wels.webp" width="768" height="1024" alt="Мотоцикл Wels — учебная мототехника" loading="lazy" />
+            <span class="gallery-item__caption">Wels · A</span>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top:32px; justify-content:center">
+          <a class="btn btn-outline" href="/category-b/">Весь парк категории B {{ICON_ARROW}}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ ADVANTAGES =========================== -->
+    <section class="section-pad-lg section-dark">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Цифры и условия</span>
+          <h2>Автошкола в цифрах</h2>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-item reveal">
+            <span class="stat-number">0,3<span class="stat-unit">га</span></span>
+            <span class="stat-label">закрытая площадка с эстакадой</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number">20<span class="stat-unit">+</span></span>
+            <span class="stat-label">единиц техники в автопарке</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number">7</span>
+            <span class="stat-label">категорий обучения в одной школе</span>
+          </div>
+        </div>
+
+        <div class="divider" style="margin-block:44px"></div>
+
+        <div class="split-fact split-fact--3">
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">Экзамен на нашей машине</div>
+            <div class="split-fact__desc">Сдавать в ГИБДД можно на том же автомобиле, где учились.</div>
+          </div>
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">Оплата частями</div>
+            <div class="split-fact__desc">Стоимость обучения можно разделить на три платежа.</div>
+          </div>
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">Только вождение</div>
+            <div class="split-fact__desc">Если права уже есть, можно взять одни часы практики.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ BRANCHES ============================= -->
+    <section class="section-pad-lg">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Где мы находимся</span>
+          <h2>Два класса и закрытая площадка</h2>
+        </div>
+
+        <div class="split-fact">
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">{{ICON_PIN}} ул. Мира, 75</div>
+            <div class="split-fact__desc">Главный класс на 18 мест, здесь же приём.<br />+7 (342) 22-666-99</div>
+          </div>
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">{{ICON_PIN}} ул. Ветлужская, 60/1</div>
+            <div class="split-fact__desc">Второй учебный класс на 9 посадочных мест.<br />+7 (951) 927-22-55</div>
+          </div>
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">{{ICON_PIN}} ул. Встречная, 28</div>
+            <div class="split-fact__desc">Площадка с эстакадой и разметкой для первых занятий.</div>
+          </div>
+          <div class="split-fact__item reveal">
+            <div class="split-fact__title">{{ICON_CLOCK}} Режим работы</div>
+            <div class="split-fact__desc">Пн–Чт с утра до вечера, Пт до 16:00, выходные — Сб и Вс.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== FAQ ================================ -->
+    <section class="section-pad-lg section-surface">
+      <div class="container" style="max-width:860px">
+        <div class="section-head center">
+          <span class="eyebrow">Частые вопросы</span>
+          <h2>Что обычно спрашивают</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-item__q">С какого возраста можно поступить?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>С 14 лет — на категорию A1, с 16 лет — на A и B, с 17 лет — на C, с 21 года — на D. Для категорий с прицепом (BE, CE, DE) и переподготовки нужно действующее водительское удостоверение соответствующей базовой категории со стажем от 1 года.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__q">Сколько длится обучение?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>Зависит от категории: например, на B — 190 (механика) или 188 (АКП) академических часов, график рассчитан примерно на 10 недель при обычной нагрузке. Точные часы по каждой категории — на странице соответствующего направления.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__q">Сколько стоит обучение?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>Стоимость зависит от категории и текущего прейскуранта — уточняйте у администратора по телефону. Возможна рассрочка платежа.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__q">Нужна ли медицинская справка?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>Да, справка установленного образца нужна до начала практических занятий по вождению. Автошкола помогает организовать прохождение медкомиссии.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__q">Как проходит экзамен?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>Сначала внутренний квалификационный экзамен в автошколе, затем экзамен в ГИБДД. Мы оформляем пакет документов и сопровождаем на экзамене — при необходимости можно сдавать практическую часть на автомобиле школы.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__q">Можно учиться на автомате?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
+            <div class="faq-item__a" data-anim>Да, по категории B в парке есть автомобили с автоматической коробкой передач — часы вождения на АКП немного меньше, чем на механике.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= LEAD FORM ============================ -->
+    <section class="section-pad-lg" id="lead-form-section">
+      <div class="container" style="max-width:640px">
+        <div class="form-card" id="lead-form">
+          <form class="form" novalidate>
+            <div class="form-fields">
+              <h3>Записаться на обучение</h3>
+              <p class="text-secondary" style="margin-top:8px; margin-bottom:24px">Оставьте телефон — перезвоним, расскажем про группы и подберём удобное расписание.</p>
+
+              <div class="form-row">
+                <label class="form-label" for="lead-name">Имя</label>
+                <input class="form-input" type="text" id="lead-name" name="name" placeholder="Как к вам обращаться" autocomplete="name" required />
+                <span class="form-error-msg"></span>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="lead-phone">Телефон</label>
+                <input class="form-input" type="tel" id="lead-phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" data-phone-mask required />
+                <span class="form-error-msg"></span>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="lead-category">Направление</label>
+                <select class="form-input form-select" id="lead-category" name="category" required>
+                  <option value="">Выберите направление</option>
+                  <option>Категория B</option>
+                  <option>Категория A</option>
+                  <option>Профессиональные категории (C/D/BE/CE/DE)</option>
+                  <option>Тракторная техника</option>
+                </select>
+                <span class="form-error-msg"></span>
+              </div>
+
+              <div class="form-row">
+                <label class="form-check">
+                  <input type="checkbox" name="consent" required />
+                  <span>Согласен(на) с <a href="/policy/" target="_blank" rel="noopener">политикой обработки персональных данных</a></span>
+                </label>
+                <span class="form-error-msg"></span>
+              </div>
+
+              <button class="btn btn-primary btn-block btn-lg" type="submit">Отправить заявку</button>
+              <div class="form-status" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="form-success-panel" role="status">
+              <div class="form-success-panel__icon">{{ICON_CHECK_PLAIN}}</div>
+              <h3>Заявка отправлена</h3>
+              <p class="text-secondary" style="margin-top:10px">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+              <button class="btn btn-outline" type="button" data-form-reset style="margin-top:20px">Отправить ещё раз</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  {{FOOTER}}
+  <script src="/js/main.js" defer></script>
+  <script src="/js/forms.js" defer></script>
+</body>
+</html>
