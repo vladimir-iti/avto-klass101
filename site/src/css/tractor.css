@@ -6,10 +6,10 @@
 
 .equip-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
-@media (max-width: 900px) { .equip-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) { .equip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .equip-grid { grid-template-columns: 1fr; } }
 
 .equip-card {
@@ -18,9 +18,14 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform var(--t-base) var(--ease-out);
 }
+.equip-card:hover { transform: translateY(-4px); }
 .equip-card__media { aspect-ratio: 4/3; background: #111; }
-.equip-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.equip-card--wide .equip-card__media { aspect-ratio: 16/10; }
+.equip-card--tall .equip-card__media { aspect-ratio: 3/4; }
+.equip-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow) var(--ease-out); }
+.equip-card:hover .equip-card__media img { transform: scale(1.05); }
 .equip-card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; }
 .equip-card__title { color: #fff; font-weight: 700; font-size: 1.0625rem; }
 .equip-card__desc { color: var(--color-text-on-dark-secondary); font-size: var(--fs-small); }
@@ -74,3 +79,111 @@
 }
 .limits-box svg { color: var(--color-accent); width: 26px; height: 26px; margin-top: 2px; flex: none; }
 .limits-box__title { font-weight: 700; color: #fff; margin-bottom: 8px; }
+
+/* ==========================================================================
+   Карточки категорий тракторных прав
+   ========================================================================== */
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 980px) { .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .cat-grid { grid-template-columns: 1fr; } }
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: transform var(--t-base) var(--ease-out),
+              border-color var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease-out);
+}
+.cat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--color-accent-rgb), 0.45);
+  box-shadow: var(--shadow-card);
+}
+
+.cat-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface-sunken);
+  overflow: hidden;
+}
+.cat-card__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Буква категории поверх фото */
+.cat-card__badge {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  min-width: 46px;
+  height: 46px;
+  padding-inline: 12px;
+  border-radius: 14px;
+  background: var(--color-ink);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+.cat-card__age {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-ink);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+}
+
+.cat-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 22px 24px;
+  flex: 1;
+}
+.cat-card__title { font-weight: 700; font-size: 1.125rem; }
+.cat-card__desc { color: var(--color-text-secondary); font-size: var(--fs-small); flex: 1; }
+.cat-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--color-accent-text);
+}
+.cat-card__cta svg { transition: transform var(--t-base) var(--ease-out); }
+.cat-card:hover .cat-card__cta svg { transform: translateX(3px); }
+
+/* Профессии — компактные строки */
+.prof-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 720px) { .prof-list { grid-template-columns: 1fr; } }
+
+.prof-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: var(--radius-card-sm);
+  background: var(--color-ink-soft);
+  border: 1px solid var(--color-border-on-dark);
+}
+.prof-item svg { color: var(--color-accent); flex: none; width: 22px; height: 22px; }
+.prof-item span { color: var(--color-text-on-dark); font-weight: 600; }

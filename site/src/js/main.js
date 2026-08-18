@@ -149,37 +149,110 @@
 
   /* ---------------------------------------------------------------------
      FAQ: анимация высоты <details>
-     --------------------------------------------------------------------- */
-  document.querySelectorAll('.faq-item').forEach(function (item) {
-    var panel = item.querySelector('[data-anim]');
-    if (!panel) return;
 
-    item.addEventListener('toggle', function () {
-      if (panel._faqTransitionEnd) {
-        panel.removeEventListener('transitionend', panel._faqTransitionEnd);
-        panel._faqTransitionEnd = null;
+     Закрытый <details> сразу убирает содержимое из раскладки, поэтому
+     схлопываем панель до снятия open. Внутренний блок всегда сохраняет
+     свои отступы — анимируется только внешний overflow-контейнер.
+     --------------------------------------------------------------------- */
+  document.querySelectorAll('.faq-list').forEach(function (list) {
+    var items = Array.prototype.slice.call(list.querySelectorAll(':scope > .faq-item'));
+
+    function stopAnimation(item) {
+      if (!item._faqAnimation) return;
+      if (item._faqAnimationTimeout) {
+        clearTimeout(item._faqAnimationTimeout);
+        item._faqAnimationTimeout = null;
       }
-      if (reducedMotion) {
-        panel.style.height = item.open ? 'auto' : '0px';
+      item._faqAnimation.cancel();
+      item._faqAnimation = null;
+    }
+
+    /* onfinish иногда не срабатывает (фоновая вкладка, прерванный переход) —
+       подстраховываемся таймером на ту же длительность, чтобы панель
+       не застревала между состояниями. Колбэк идемпотентен. */
+    function armFinish(item, animation, duration, onDone) {
+      var done = false;
+      var finish = function () {
+        if (done || item._faqAnimation !== animation) return;
+        done = true;
+        if (item._faqAnimationTimeout) {
+          clearTimeout(item._faqAnimationTimeout);
+          item._faqAnimationTimeout = null;
+        }
+        item._faqAnimation = null;
+        onDone();
+      };
+      animation.onfinish = finish;
+      animation.oncancel = function () {
+        if (item._faqAnimation === animation) item._faqAnimation = null;
+        if (item._faqAnimationTimeout) {
+          clearTimeout(item._faqAnimationTimeout);
+          item._faqAnimationTimeout = null;
+        }
+      };
+      item._faqAnimationTimeout = setTimeout(finish, duration + 80);
+    }
+
+    function openItem(item) {
+      var panel = item.querySelector('[data-anim]');
+      if (!panel) {
+        item.open = true;
         return;
       }
-      if (item.open) {
-        var h = panel.scrollHeight;
-        panel.style.height = '0px';
-        requestAnimationFrame(function () {
-          panel.style.height = h + 'px';
-        });
-        var onEnd = function (event) {
-          if (event.target !== panel || event.propertyName !== 'height') return;
-          panel.style.height = 'auto';
-          panel.removeEventListener('transitionend', onEnd);
-          panel._faqTransitionEnd = null;
-        };
-        panel._faqTransitionEnd = onEnd;
-        panel.addEventListener('transitionend', onEnd);
-      } else {
-        panel.style.height = '0px';
+
+      var wasOpen = item.open;
+      var from = wasOpen ? panel.getBoundingClientRect().height : 0;
+      stopAnimation(item);
+      item.open = true;
+      item.classList.remove('is-closing');
+
+      items.forEach(function (other) {
+        if (other !== item && other.open) closeItem(other);
+      });
+
+      if (reducedMotion) return;
+      var to = panel.scrollHeight;
+      var duration = 260;
+      var animation = panel.animate(
+        [{ height: from + 'px' }, { height: to + 'px' }],
+        { duration: duration, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      );
+      item._faqAnimation = animation;
+      armFinish(item, animation, duration, function () {});
+    }
+
+    function closeItem(item) {
+      var panel = item.querySelector('[data-anim]');
+      if (!item.open) return;
+      if (!panel || reducedMotion) {
+        item.open = false;
+        item.classList.remove('is-closing');
+        return;
       }
+
+      var from = panel.getBoundingClientRect().height;
+      stopAnimation(item);
+      item.classList.add('is-closing');
+      var duration = 260;
+      var animation = panel.animate(
+        [{ height: from + 'px' }, { height: '0px' }],
+        { duration: duration, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      );
+      item._faqAnimation = animation;
+      armFinish(item, animation, duration, function () {
+        item.open = false;
+        item.classList.remove('is-closing');
+      });
+    }
+
+    items.forEach(function (item) {
+      var summary = item.querySelector(':scope > summary');
+      if (!summary) return;
+      summary.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (item.open && !item.classList.contains('is-closing')) closeItem(item);
+        else openItem(item);
+      });
     });
   });
 

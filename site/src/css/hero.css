@@ -7,9 +7,18 @@
   padding-top: clamp(48px, 6vw, 88px);
   padding-bottom: clamp(56px, 6vw, 96px);
   overflow: hidden;
+
+  /* Первый экран занимает ровно высоту окна за вычетом шапки.
+     svh — «маленькая» высота вьюпорта: на мобильных не скачет,
+     когда прячется адресная строка. vh оставлен как запасной. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  align-items: center;
 }
 
 .hero__inner {
+  width: 100%;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(32px, 5vw, 64px);
@@ -32,6 +41,8 @@
 
 .hero__media { position: relative; }
 .hero__media-frame {
+  position: relative;
+  z-index: 1;
   border-radius: 28px;
   overflow: hidden;
   aspect-ratio: 5 / 4;
@@ -39,32 +50,46 @@
 }
 .hero__media-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-.hero__badge {
+/* Мягкое фирменное свечение за фото. Статичное, без анимации.
+   Отступы в процентах — растёт вместе с фото, поэтому одинаково
+   выглядит и на широком десктопном кадре, и на коротком мобильном. */
+.hero__glow {
   position: absolute;
-  left: -18px;
-  bottom: -18px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card-sm);
-  padding: 16px 20px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 280px;
+  inset: -9%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 40px;
+  background: var(--gradient-accent);
+  filter: blur(46px);
+  opacity: 0.4;
 }
-.hero__badge .stat-number { font-size: 1.75rem; }
-.hero__badge-label { font-size: var(--fs-micro); color: var(--color-text-secondary); line-height: 1.3; }
 
 @media (max-width: 980px) {
-  .hero__inner { grid-template-columns: 1fr; }
-  .hero__media { order: -1; }
+  /* Одна колонка: текст занимает сколько нужно, фото — весь остаток,
+     поэтому первый экран точно совпадает с высотой окна. */
+  /* Точная высота (а не только min-height) — иначе фото не «знает»,
+     что места мало, и не сжимается. */
+  .hero {
+    align-items: stretch;
+    height: calc(100vh - var(--header-h));
+    height: calc(100svh - var(--header-h));
+  }
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;   /* на десктопе тут center — в колонке он сжимал фото */
+    flex: 1;
+  }
+  /* Фото — «резиновое»: 240px желаемой высоты, но сжимается, если тексту
+     нужно больше. Так первый экран всегда точно равен высоте окна. */
+  .hero__media { order: -1; display: flex; flex-direction: column; flex: 1 1 240px; min-height: 0; }
+  .hero__media-frame { aspect-ratio: auto; flex: 1; min-height: 0; }
+  .hero { padding-top: 28px; padding-bottom: 32px; }
+  .hero__content { gap: 18px; }
   .hero__content { max-width: none; }
-  .hero__badge { left: 16px; bottom: -16px; }
 }
 
 @media (max-width: 560px) {
-  .hero__badge { position: static; margin-top: 16px; max-width: none; }
   .hero__actions .btn { width: 100%; }
   .hero__actions { flex-direction: column; }
 }
@@ -79,11 +104,41 @@
   border-color: var(--color-border-on-dark);
 }
 .hero.is-dark .btn-outline:hover { border-color: var(--color-text-on-dark-secondary); }
-.hero.is-dark .hero__badge {
-  background: var(--color-ink-soft);
-  border-color: var(--color-border-on-dark);
-}
-.hero.is-dark .hero__badge-label { color: var(--color-text-on-dark-secondary); }
 
 /* --- Компактный hero (A/professional) --- */
 .hero.is-compact { padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
+
+/* Невысокие окна (ноутбуки 768–800 px по высоте): ужимаем вертикальные
+   отступы, иначе высокий hero (например, тракторный) вылезает за экран. */
+@media (min-width: 981px) and (max-height: 860px) {
+  /* .hero.is-compact перебивает одиночный .hero по приоритету — перечисляем оба */
+  .hero, .hero.is-compact { padding-top: 32px; padding-bottom: 36px; }
+  .hero__content { gap: 18px; }
+  .hero__meta { margin-top: 2px; }
+}
+@media (max-width: 980px) and (max-height: 720px) {
+  .hero { padding-top: 24px; padding-bottom: 28px; }
+  .hero__content { gap: 16px; }
+  .hero__media { flex-basis: 150px; }
+}
+
+/* Совсем невысокие телефоны (iPhone SE и подобные, 667 px и ниже):
+   уменьшаем заголовок и фото, иначе первый экран не помещается. */
+@media (max-width: 980px) and (max-height: 700px) {
+  .hero { padding-top: 18px; padding-bottom: 22px; }
+  .hero__content { gap: 13px; }
+  .hero__media { flex-basis: 110px; }
+  .hero__title { font-size: clamp(1.6rem, 1.25rem + 2.2vw, 2.25rem); }
+  .hero__desc { font-size: var(--fs-body); }
+  .hero__meta { gap: 14px; margin-top: 2px; }
+}
+
+/* Самые узкие и низкие экраны (320x568): убираем фото из первого экрана —
+   иначе текст и кнопки физически не помещаются. */
+@media (max-width: 380px) and (max-height: 600px) {
+  .hero { padding-top: 14px; padding-bottom: 18px; }
+  .hero__content { gap: 11px; }
+  .hero__media { display: none; }
+  .hero__title { font-size: 1.5rem; }
+  .hero__meta { display: none; }
+}

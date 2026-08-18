@@ -9,14 +9,14 @@ function mobileNav(hasForm = true) {
   return `<div class="mobile-nav" id="mobile-nav" data-mobile-nav role="dialog" aria-modal="true" aria-label="Меню сайта" hidden>
     <div class="mobile-nav__top">
       <a href="/" aria-label="Авто-Класс — на главную">
-        <img src="/images/logo/logo-color-web.png" width="140" height="80" alt="Авто-Класс" />
+        <img src="/images/logo/logo-color-web.webp" width="140" height="80" alt="Авто-Класс" />
       </a>
       <button type="button" class="nav-toggle" data-nav-close aria-label="Закрыть меню">
         <span class="nav-toggle__bars" style="transform:rotate(45deg)"><span style="top:5px"></span><span style="opacity:0"></span><span style="top:5px;transform:rotate(90deg)"></span></span>
       </button>
     </div>
     <nav class="mobile-nav__body" aria-label="Мобильная навигация">
-      <div class="mobile-nav__link">Направления</div>
+      <div class="mobile-nav__link">Обучение</div>
       <div class="mobile-nav__sub">
             ${dirLinks}
       </div>

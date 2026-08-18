@@ -25,6 +25,7 @@ const mobileNav = require('./partials/mobileNav');
 const footer = require('./partials/footer');
 const headCommon = require('./partials/headCommon');
 const icons = require('./partials/icons');
+const priceBlock = require('./partials/priceBlock');
 
 const ICON_TOKENS = {
   '{{ICON_SHIELD}}': icons.shield,
@@ -56,7 +57,7 @@ const ORG_SCHEMA_BASE = {
   name: 'Авто-Класс',
   legalName: 'АНО ДПО «Авто-класс»',
   url: SITE_ORIGIN,
-  logo: `${SITE_ORIGIN}/images/logo/logo-color-web.png`,
+  logo: `${SITE_ORIGIN}/images/logo/logo-color-2x.png`,
   telephone: '+7-342-27-604-05',
   email: 'avto-klass59@mail.ru',
   address: [
@@ -85,6 +86,7 @@ const PAGES = [
     title: 'Автошкола «Авто-Класс» в Перми — обучение вождению категорий A, B, C, D, BE, CE, DE и трактористов',
     description: 'Автошкола «Авто-Класс» в Перми: подготовка водителей категорий A, B, C, D, BE, CE, DE и трактористов. Собственная закрытая площадка, автомобили с АКП, бессрочная лицензия. Приём круглый год.',
     ogImage: '/images/category-b/picanto-side.webp',
+    priceHours: 'от 16 до 100 часов по категории',
     schema: ORG_SCHEMA_BASE,
   },
   {
@@ -95,6 +97,7 @@ const PAGES = [
     title: 'Обучение на категорию B в Перми — автошкола «Авто-Класс»',
     description: '190 академических часов, 56 часов практики, механика и АКП. Закрытая площадка с эстакадой, вечерние занятия, приём круглый год. Автошкола «Авто-Класс», Пермь.',
     ogImage: '/images/category-b/picanto-side.webp',
+    priceHours: '56 часов',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'Course',
@@ -111,6 +114,7 @@ const PAGES = [
     title: 'Обучение на категорию A и A1 в Перми — автошкола «Авто-Класс»',
     description: 'Подготовка водителей мотоциклов категории A и A1 в Перми. Практика на закрытой площадке, собственный парк мототехники. Автошкола «Авто-Класс».',
     ogImage: '/images/category-a/motocikl-krasny.webp',
+    priceHours: '18 часов',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'Course',
@@ -127,6 +131,7 @@ const PAGES = [
     title: 'Категории C, D, BE, CE, DE — обучение и переподготовка водителей — «Авто-Класс»',
     description: 'Подготовка и переподготовка водителей категорий C, D, BE, CE, DE в Перми. Грузовики, автобусы, прицепы. Партнёры по трудоустройству. Автошкола «Авто-Класс».',
     ogImage: '/images/professional/gaz-next.webp',
+    priceHours: 'от 16 до 100 часов',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -144,9 +149,10 @@ const PAGES = [
     file: 'tractor.html',
     activeKey: 'tractor',
     pageCss: ['tractor.css'],
-    title: 'Обучение на тракториста в Перми — тракторная и спецтехника — «Авто-Класс»',
-    description: 'Подготовка трактористов в автошколе «Авто-Класс», Пермь. Реальный парк техники: МТЗ, Т-25, Т-150К, ДТ-75, мотовездеходы. Звоните для уточнения категорий и сроков.',
-    ogImage: '/images/tractor/hero-wide.webp',
+    title: 'Права тракториста-машиниста в Перми — категории B, C, D, E — «Авто-Класс»',
+    description: 'Обучение на права тракториста-машиниста в Перми: категории B, C, D, E, снегоход и квадроцикл, погрузчик и экскаватор. Автодром на Леонова, 67. Срок обучения около 1,5 месяцев.',
+    ogImage: '/images/tractor/t25-estakada.webp',
+    priceHours: 'на площадке и маршруте',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'Course',
@@ -161,7 +167,7 @@ const PAGES = [
     pageCss: ['category.css'],
     title: 'Документы и лицензия — автошкола «Авто-Класс»',
     description: 'Лицензия на образовательную деятельность, заключение ГИБДД и другие документы автошколы «Авто-Класс» в Перми.',
-    ogImage: '/images/logo/logo-color-web.png',
+    ogImage: '/images/logo/logo-color-2x.png',
     schema: null,
     hasForm: false,
   },
@@ -172,7 +178,7 @@ const PAGES = [
     pageCss: [],
     title: 'Политика обработки персональных данных — автошкола «Авто-Класс»',
     description: 'Политика обработки персональных данных АНО ДПО «Авто-класс».',
-    ogImage: '/images/logo/logo-color-web.png',
+    ogImage: '/images/logo/logo-color-2x.png',
     schema: null,
     hasForm: false,
   },
@@ -284,6 +290,7 @@ function build() {
       '{{HEADER}}': header(page.activeKey, page.hasForm !== false),
       '{{MOBILE_NAV}}': mobileNav(page.hasForm !== false),
       '{{FOOTER}}': footer(),
+      '{{PRICE_BLOCK}}': page.priceHours ? priceBlock({ hours: page.priceHours }) : '',
       ...ICON_TOKENS,
     });
 

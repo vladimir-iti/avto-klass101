@@ -26,7 +26,7 @@
       <div class="container hero__inner">
         <div class="hero__content reveal is-visible">
           <span class="eyebrow">Категория A · A1 · мотоцикл</span>
-          <h1 class="hero__title">Права на мотоцикл — с 14 лет на A1</h1>
+          <h1 class="hero__title">Права на мотоцикл —<br />с 14 лет на A1</h1>
           <p class="hero__desc">130 (механика) или 128 (АКП) академических часов, из них 18 или 16 часов — вождение на закрытой площадке. Приём на сезон ограничен.</p>
           <div class="hero__actions">
             <a class="btn btn-primary btn-lg" href="#lead-form" data-open-lead>Записаться на категорию A</a>
@@ -38,12 +38,9 @@
           </div>
         </div>
         <div class="hero__media reveal is-visible">
+          <span class="hero__glow" aria-hidden="true"></span>
           <div class="hero__media-frame">
-            <img src="/images/category-a/motocikl-krasny.webp" width="768" height="1024" alt="Учебный мотоцикл автошколы «Авто-Класс»" fetchpriority="high" />
-          </div>
-          <div class="hero__badge">
-            <span class="stat-number"><span style="color:var(--color-accent-strong)">14</span> лет</span>
-            <span class="hero__badge-label">минимальный возраст приёма на A1</span>
+            <img src="/images/category-a/motocikl-krasny.webp" width="768" height="1024" alt="Учебный мотоцикл автошколы «Авто-Класс»" fetchpriority="high" srcset="/images/category-a/motocikl-krasny-360.webp 360w, /images/category-a/motocikl-krasny-480.webp 480w, /images/category-a/motocikl-krasny-640.webp 640w, /images/category-a/motocikl-krasny.webp 768w" sizes="(max-width: 980px) 92vw, (max-width: 1200px) 45vw, 523px" />
           </div>
         </div>
       </div>
@@ -88,10 +85,11 @@
           </table>
         </div>
 
-        <div class="price-note" style="margin-top:24px">
-          {{ICON_DOC}}
-          <span><strong>Стоимость обучения</strong> назовём по телефону. Если берёте сразу две категории, теория по второй обойдётся дешевле.</span>
+        <div class="section-head" style="margin-top:56px">
+          <span class="eyebrow">Стоимость</span>
+          <h2>Из чего складывается цена</h2>
         </div>
+        {{PRICE_BLOCK}}
       </div>
     </section>
 
@@ -106,15 +104,15 @@
 
         <div class="gallery-grid">
           <div class="gallery-item reveal">
-            <img src="/images/category-a/dva-motocikla.webp" width="768" height="1024" alt="Два учебных мотоцикла автошколы «Авто-Класс»" loading="lazy" style="object-position:50% 20%" />
+            <img src="/images/category-a/dva-motocikla-wide.webp" width="730" height="548" alt="Два учебных мотоцикла автошколы «Авто-Класс»" loading="lazy" srcset="/images/category-a/dva-motocikla-wide-360.webp 360w, /images/category-a/dva-motocikla-wide-480.webp 480w, /images/category-a/dva-motocikla-wide-640.webp 640w, /images/category-a/dva-motocikla-wide.webp 730w" sizes="(max-width: 520px) 92vw, (max-width: 900px) 45vw, (max-width: 1440px) 30vw, 371px" />
             <span class="gallery-item__caption">Учебный парк мототехники</span>
           </div>
           <div class="gallery-item reveal">
-            <img src="/images/category-a/motocikl-krasny.webp" width="768" height="1024" alt="Учебный мотоцикл, категория A" loading="lazy" />
+            <img src="/images/category-a/motocikl-krasny.webp" width="768" height="1024" alt="Учебный мотоцикл, категория A" loading="lazy" srcset="/images/category-a/motocikl-krasny-360.webp 360w, /images/category-a/motocikl-krasny-480.webp 480w, /images/category-a/motocikl-krasny-640.webp 640w, /images/category-a/motocikl-krasny.webp 768w" sizes="(max-width: 980px) 92vw, (max-width: 1200px) 45vw, 523px" />
             <span class="gallery-item__caption">Мотоцикл · категория A</span>
           </div>
           <div class="gallery-item reveal">
-            <img src="/images/category-a/motocikl-wels.webp" width="768" height="1024" alt="Мотоцикл Wels — учебная техника категории A" loading="lazy" />
+            <img src="/images/category-a/motocikl-wels.webp" width="768" height="1024" alt="Мотоцикл Wels — учебная техника категории A" loading="lazy" srcset="/images/category-a/motocikl-wels-360.webp 360w, /images/category-a/motocikl-wels-480.webp 480w, /images/category-a/motocikl-wels-640.webp 640w, /images/category-a/motocikl-wels.webp 768w" sizes="(max-width: 520px) 92vw, (max-width: 900px) 45vw, (max-width: 1440px) 30vw, 371px" />
             <span class="gallery-item__caption">Wels · категория A</span>
           </div>
         </div>
@@ -126,7 +124,7 @@
       <div class="container two-col reverse">
         <div class="two-col__media reveal">
           <div class="media-frame" style="aspect-ratio:4/5">
-            <img src="/images/common/klass-1.webp" width="780" height="1040" alt="Учебный класс автошколы «Авто-Класс»" loading="lazy" />
+            <img src="/images/common/klass-1.webp" width="780" height="1040" alt="Учебный класс автошколы «Авто-Класс»" loading="lazy" srcset="/images/common/klass-1-360.webp 360w, /images/common/klass-1-480.webp 480w, /images/common/klass-1-640.webp 640w, /images/common/klass-1.webp 780w" sizes="(max-width: 900px) 92vw, (max-width: 1200px) 46vw, 581px" />
           </div>
         </div>
         <div class="reveal">
@@ -180,19 +178,19 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary class="faq-item__q">Когда открывается набор?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
-            <div class="faq-item__a" data-anim>Практика по категории A проходит на открытой площадке, поэтому группы формируются по сезону. Оставьте заявку — сообщим точную дату ближайшего набора.</div>
+            <div class="faq-item__collapse" data-anim><div class="faq-item__a">Практика по категории A проходит на открытой площадке, поэтому группы формируются по сезону. Оставьте заявку — сообщим точную дату ближайшего набора.</div></div>
           </details>
           <details class="faq-item">
             <summary class="faq-item__q">Можно ли поступить в 14 лет?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
-            <div class="faq-item__a" data-anim>Да, но только на категорию A1 (лёгкие мотоциклы) и с письменного согласия родителей или законных представителей. На категорию A приём — с 16 лет.</div>
+            <div class="faq-item__collapse" data-anim><div class="faq-item__a">Да, но только на категорию A1 (лёгкие мотоциклы) и с письменного согласия родителей или законных представителей. На категорию A приём — с 16 лет.</div></div>
           </details>
           <details class="faq-item">
             <summary class="faq-item__q">Нужны ли права категории B, чтобы учиться на A?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
-            <div class="faq-item__a" data-anim>Нет, категория A — самостоятельное направление и не требует предварительных прав категории B.</div>
+            <div class="faq-item__collapse" data-anim><div class="faq-item__a">Нет, категория A — самостоятельное направление и не требует предварительных прав категории B.</div></div>
           </details>
           <details class="faq-item">
             <summary class="faq-item__q">Выгодно ли учиться сразу на A и B?<span class="faq-item__icon">{{ICON_PLUS}}</span></summary>
-            <div class="faq-item__a" data-anim>При обучении на две категории одновременно теория по второй категории стоит дешевле, чем отдельным курсом. Точные условия уточняйте у администратора.</div>
+            <div class="faq-item__collapse" data-anim><div class="faq-item__a">При обучении на две категории одновременно теория по второй категории стоит дешевле, чем отдельным курсом. Точные условия уточняйте у администратора.</div></div>
           </details>
         </div>
       </div>
