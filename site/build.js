@@ -224,7 +224,12 @@ function withBasePath(html) {
   if (!BASE_PATH) return html;
   return html
     .replace(/(\s(?:href|src)=")\/(?!\/)/g, `$1${BASE_PATH}/`)
-    .replace(/(\scontent=")\/(?!\/)/g, `$1${BASE_PATH}/`);
+    .replace(/(\scontent=")\/(?!\/)/g, `$1${BASE_PATH}/`)
+    // srcset — это список «путь дескриптор, путь дескриптор», поэтому
+    // одним общим правилом для атрибутов он не покрывается: префикс
+    // нужно подставить каждому пути внутри значения.
+    .replace(/\ssrcset="([^"]*)"/g, (m, list) =>
+      ' srcset="' + list.replace(/(^|,\s*)\/(?!\/)/g, `$1${BASE_PATH}/`) + '"');
 }
 
 /** То же для путей внутри CSS: url('/fonts/...') */
