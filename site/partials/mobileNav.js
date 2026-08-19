@@ -21,7 +21,7 @@ function mobileNav(hasForm = true) {
             ${dirLinks}
       </div>
       <a class="mobile-nav__link" href="/#about">Об автошколе</a>
-      <a class="mobile-nav__link" href="/#contacts">Контакты</a>
+      <a class="mobile-nav__link" href="#contacts">Контакты</a>
 
       <div class="mobile-nav__foot">
         <a class="mobile-nav__phone" href="${CONTACTS.phoneMainHref}">${CONTACTS.phoneMain}</a>

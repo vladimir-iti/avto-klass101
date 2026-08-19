@@ -34,7 +34,7 @@ function header(activeKey, hasForm = true) {
           </div>
         </div>
         <a class="main-nav__link" href="/#about">Об автошколе</a>
-        <a class="main-nav__link" href="/#contacts">Контакты</a>
+        <a class="main-nav__link" href="#contacts">Контакты</a>
       </nav>
 
       <div class="site-header__actions">

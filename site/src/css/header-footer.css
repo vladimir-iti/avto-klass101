@@ -155,7 +155,9 @@
   padding-inline: var(--container-pad);
   flex: none;
 }
-.mobile-nav__top img { height: 40px; }
+/* width: auto обязателен: без него ширина берётся из атрибута width
+   в разметке, и логотип растягивается по горизонтали. */
+.mobile-nav__top img { height: 40px; width: auto; }
 
 .mobile-nav__body { padding: 8px var(--container-pad) 40px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
 
@@ -204,7 +206,10 @@ body.nav-open { overflow: hidden; }
 }
 
 .footer-brand { display: flex; flex-direction: column; gap: 18px; }
-.footer-brand img { height: 32px; }
+/* align-self: flex-start обязателен: .footer-brand — flex-column, и по умолчанию
+   align-items: stretch растягивает img по ширине контейнера, игнорируя width: auto,
+   потому что высота задана явно (48px), а не auto. */
+.footer-brand img { height: 48px; width: auto; align-self: flex-start; }
 .footer-brand p { color: var(--color-text-on-dark-secondary); font-size: var(--fs-small); max-width: 34ch; }
 
 .footer-social {

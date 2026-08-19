@@ -15,6 +15,9 @@ const CONTACTS = {
   addressMira: 'г. Пермь, ул. Мира, 75',
   addressVetluzhskaya: 'г. Пермь, ул. Ветлужская, 60/1',
   addressPolygon: 'г. Пермь, ул. Встречная, 28',
+  addressTractor: 'г. Пермь, ул. Космонавта Леонова, 67',
+  phoneTractor: '+7 (342) 293-27-28',
+  phoneTractorHref: 'tel:+73422932728',
 };
 
 const DIRECTIONS = [

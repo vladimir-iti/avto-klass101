@@ -51,6 +51,11 @@ function footer() {
               <strong>Закрытая площадка</strong>
               <span>${CONTACTS.addressPolygon}</span>
             </div>
+            <div class="footer-branch">
+              <strong>Автодром тракторной техники</strong>
+              <span>${CONTACTS.addressTractor}</span>
+              <a href="${CONTACTS.phoneTractorHref}">${CONTACTS.phoneTractor}</a>
+            </div>
             <a class="footer-strong" href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>
           </div>
         </div>

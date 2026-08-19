@@ -16,3 +16,6 @@ site/dist/
 # Node (на случай, если появятся зависимости)
 node_modules/
 npm-debug.log*
+
+# Локальные конфиги инструментов
+.claude/
