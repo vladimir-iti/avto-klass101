@@ -242,8 +242,14 @@ body.nav-open { overflow: hidden; }
 .footer-col .footer-strong { color: var(--color-text-on-dark); font-weight: 600; }
 
 .footer-branches { display: flex; flex-direction: column; gap: 18px; }
-.footer-branch { font-size: var(--fs-small); color: var(--color-text-on-dark-secondary); }
-.footer-branch strong { display: block; color: var(--color-text-on-dark); font-weight: 600; margin-bottom: 2px; }
+/* Колонка, а не поток инлайнов: у филиала может быть и адрес, и телефон,
+   и без этого они склеиваются в одну строку, когда адрес переносится. */
+.footer-branch { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; font-size: var(--fs-small); color: var(--color-text-on-dark-secondary); }
+.footer-branch strong { color: var(--color-text-on-dark); font-weight: 600; }
+
+.footer-hours { margin-top: 4px; font-size: var(--fs-small); color: var(--color-text-on-dark-secondary); }
+.footer-hours strong { display: block; color: var(--color-text-on-dark); font-weight: 600; margin-bottom: 6px; }
+.footer-hours span { display: block; }
 
 .footer-bottom {
   padding-top: 26px;
