@@ -47,7 +47,7 @@ const ICON_TOKENS = {
   '{{ICON_ROUTE}}': icons.route,
 };
 
-const SITE_ORIGIN = 'https://avto-klass101.ru';
+const SITE_ORIGIN = 'https://avtoklass-perm.ru';
 
 // ---------------------------------------------------------------------------
 
@@ -319,6 +319,15 @@ function build() {
       const p = path.join(DIST, 'css', f);
       fs.writeFileSync(p, cssWithBasePath(fs.readFileSync(p, 'utf8')), 'utf8');
     }
+  }
+
+  // --- .htaccess: принудительный HTTPS (для хостинга reg.ru, GitHub Pages его игнорирует) ---
+  if (!BASE_PATH) {
+    fs.writeFileSync(
+      path.join(DIST, '.htaccess'),
+      'RewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n',
+      'utf8'
+    );
   }
 
   // --- robots.txt ---
