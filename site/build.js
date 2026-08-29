@@ -321,15 +321,6 @@ function build() {
     }
   }
 
-  // --- .htaccess: принудительный HTTPS (для хостинга reg.ru, GitHub Pages его игнорирует) ---
-  if (!BASE_PATH) {
-    fs.writeFileSync(
-      path.join(DIST, '.htaccess'),
-      'RewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n',
-      'utf8'
-    );
-  }
-
   // --- robots.txt ---
   fs.writeFileSync(
     path.join(DIST, 'robots.txt'),
