@@ -117,23 +117,18 @@
 }
 .cat-card__media img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Буква категории поверх фото */
+/* Категория поверх фото — тот же размер и форма таблетки, что у .cat-card__age,
+   но акцентная заливка (совпадает с .btn-primary: тёмный текст на фирменном градиенте). */
 .cat-card__badge {
   position: absolute;
   left: 16px;
   top: 16px;
-  min-width: 46px;
-  height: 46px;
-  padding-inline: 12px;
-  border-radius: 14px;
-  background: var(--color-ink);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-accent);
+  color: var(--color-ink);
+  font-size: var(--fs-micro);
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.01em;
 }
 .cat-card__age {
   position: absolute;
