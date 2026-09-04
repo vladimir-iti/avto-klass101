@@ -1,6 +1,14 @@
 (function () {
   'use strict';
 
+  // URL веб-приложения Google Apps Script, которое дописывает заявки
+  // в Google-таблицу и шлёт письмо на avto-klass59@mail.ru
+  // (см. docs/lead-form-setup.md — инструкция по настройке).
+  // Пока здесь плейсхолдер — форма работает (валидирует, показывает
+  // «Заявка отправлена»), но данные никуда не улетают, пока сюда не
+  // вставить реальный URL.
+  var LEAD_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzKQpcxQrOyIkhGwPC4IhPWDYeOHx0Xem3Zxxg_vG-n6LMgg3scZnremm2VRhTmmjfsIw/exec';
+
   /* ---------------------------------------------------------------------
      Маска телефона: +7 (___) ___-__-__
      --------------------------------------------------------------------- */
@@ -176,14 +184,33 @@
         submitBtn.textContent = 'Отправляем…';
       }
 
-      // Заглушка отправки: реальный backend ещё не подключён.
-      // Ничего никуда не отправляется — данные не покидают браузер.
       var payload = {
         name: (form.querySelector('input[name="name"]') || {}).value,
         phone: (form.querySelector('input[name="phone"]') || {}).value,
         category: (form.querySelector('[name="category"]') || {}).value,
         page: window.location.pathname,
       };
+
+      // Apps Script не поддерживает CORS-preflight для fetch, поэтому
+      // используем mode: "no-cors" с Content-Type: text/plain — это
+      // не требует preflight-запроса. Ответ при этом непрозрачный
+      // (opaque) и его нельзя прочитать, поэтому подтверждение
+      // «Заявка отправлена» показываем сразу, не дожидаясь сети:
+      // ждать нечего, а задержка в 650мс — просто для ощущения работы.
+      if (LEAD_ENDPOINT_URL && LEAD_ENDPOINT_URL.indexOf('REPLACE_WITH') !== 0) {
+        fetch(LEAD_ENDPOINT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+        }).catch(function (err) {
+          if (window.console && window.console.error) {
+            console.error('[Авто-Класс] не удалось отправить заявку: ' + err);
+          }
+        });
+      } else if (window.console && window.console.warn) {
+        console.warn('[Авто-Класс] LEAD_ENDPOINT_URL не настроен — заявка никуда не отправлена:', payload);
+      }
 
       window.setTimeout(function () {
         if (submitBtn) {
@@ -193,9 +220,6 @@
         form.setAttribute('data-state', 'success');
         var panel = form.querySelector('.form-success-panel');
         if (panel) panel.setAttribute('tabindex', '-1'), panel.focus();
-        if (window.console && window.console.info) {
-          console.info('[Авто-Класс] заявка (локальная заглушка, никуда не отправлена):', payload);
-        }
       }, 650);
     });
 
