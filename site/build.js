@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
@@ -238,6 +239,29 @@ function cssWithBasePath(css) {
   return css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE_PATH}/`);
 }
 
+/**
+ * Версионирование CSS/JS: хостинг кеширует статику на 45 дней
+ * (Cache-Control: max-age=3888000) без каких-либо версий в адресе, поэтому
+ * у постоянных посетителей после каждого деплоя может неделями держаться
+ * старый файл — в частности, старый src/js/forms.js со старым или ещё не
+ * подключённым адресом отправки формы. Хэш от содержимого в ?v= меняет
+ * сам URL при любом реальном изменении файла и заставляет скачать заново.
+ */
+function fileVersion(absPath) {
+  const buf = fs.readFileSync(absPath);
+  return crypto.createHash('sha1').update(buf).digest('hex').slice(0, 8);
+}
+function withAssetVersion(html) {
+  return html.replace(
+    /(\s(?:href|src)=")\/(css|js)\/([\w.-]+\.(?:css|js))(")/g,
+    (m, pre, dir, file, post) => {
+      const abs = path.join(SRC, dir, file);
+      if (!fs.existsSync(abs)) return m;
+      return `${pre}/${dir}/${file}?v=${fileVersion(abs)}${post}`;
+    }
+  );
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -305,6 +329,7 @@ function build() {
         '$&\n  <meta name="robots" content="noindex, nofollow" />'
       );
     }
+    html = withAssetVersion(html);
     html = withBasePath(html);
 
     const outPath = outPathFor(page);
