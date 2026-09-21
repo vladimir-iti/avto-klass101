@@ -7,7 +7,7 @@
  * Без фреймворков и зависимостей: читает шаблоны страниц из pages/*.html,
  * подставляет общие partial'ы (header/footer/mobile-nav/head) и мета-теги,
  * копирует статику (css/js/fonts/images/video) и пишет результат в dist/ —
- * чистый набор HTML/CSS/JS, готовый к загрузке на обычный хостинг (Beget).
+ * чистый набор HTML/CSS/JS, готовый к загрузке на обычный хостинг.
  */
 
 const fs = require('fs');
@@ -27,6 +27,7 @@ const footer = require('./partials/footer');
 const headCommon = require('./partials/headCommon');
 const icons = require('./partials/icons');
 const priceBlock = require('./partials/priceBlock');
+const intakeBadge = require('./partials/intakeBadge');
 
 const ICON_TOKENS = {
   '{{ICON_SHIELD}}': icons.shield,
@@ -320,6 +321,10 @@ function build() {
       '{{MOBILE_NAV}}': mobileNav(page.hasForm !== false),
       '{{FOOTER}}': footer(),
       '{{PRICE_BLOCK}}': page.priceHours ? priceBlock({ hours: page.priceHours }) : '',
+      '{{INTAKE_AUTO}}': intakeBadge('auto'),
+      '{{INTAKE_TRACTOR}}': intakeBadge('tractor'),
+      '{{INTAKE_MOTO}}': intakeBadge('moto'),
+      '{{INTAKE_BOTH}}': intakeBadge(['auto', 'tractor']),
       ...ICON_TOKENS,
     });
 
