@@ -1,0 +1,15 @@
+{
+  "name": "avto-klass-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Статический сайт автошколы «Авто-Класс» (Пермь). Сборщик без зависимостей: pages + partials + src -> dist.",
+  "scripts": {
+    "build": "node build.js",
+    "check": "node build.js && node scripts/check.js",
+    "serve": "node scripts/serve.js",
+    "deploy": "node build.js && node scripts/check.js && rsync -az --delete --checksum dist/ regru-avtoklass-perm:www/avtoklass-perm.ru/"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

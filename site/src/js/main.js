@@ -114,8 +114,10 @@
     dropdown.classList.toggle('is-expanded', expanded);
   }
   if (dropdown && dropdownBtn) {
+    // Именно переключение, а не только открытие: на тач-устройствах нет
+    // mouseleave, и повторный тап по «Обучение» иначе не закрывал меню.
     dropdownBtn.addEventListener('click', function () {
-      setDropdownExpanded(true);
+      setDropdownExpanded(dropdownBtn.getAttribute('aria-expanded') !== 'true');
     });
     dropdown.addEventListener('mouseenter', function () { setDropdownExpanded(true); });
     dropdown.addEventListener('mouseleave', function () { setDropdownExpanded(false); });
@@ -351,6 +353,15 @@
       scrollToHash(window.location.hash, 'auto');
     }, 60);
   }
+
+  /* ---------------------------------------------------------------------
+     Год в подвале: страницы статические, поэтому проставленный на сборке
+     год со временем устаревает. Обновляем его на актуальный.
+     --------------------------------------------------------------------- */
+  var currentYear = String(new Date().getFullYear());
+  document.querySelectorAll('[data-current-year]').forEach(function (el) {
+    if (el.textContent !== currentYear) el.textContent = currentYear;
+  });
 
   /* ---------------------------------------------------------------------
      Видео тракторной площадки: воспроизведение по клику

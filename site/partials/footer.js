@@ -3,6 +3,9 @@
 const { CONTACTS, DIRECTIONS } = require('./data');
 
 function footer() {
+  // Год проставляется на сборке, а в браузере его обновляет main.js:
+  // без этого 1 января в подвале остался бы прошлый год, пока сайт
+  // не пересоберут.
   const year = new Date().getFullYear();
   const dirLinks = DIRECTIONS.map((d) => `<li><a href="${d.href}">${d.label}</a></li>`).join('\n            ') +
     '\n            <li><a href="/#directions">Все направления</a></li>';
@@ -68,7 +71,7 @@ function footer() {
 
       <div class="footer-bottom">
         <div class="footer-bottom__left">
-          <span>© ${year} АНО ДПО «Авто-класс»</span>
+          <span>© <span data-current-year>${year}</span> АНО ДПО «Авто-класс»</span>
           <a href="/documents/">Лицензия № 3846 от 26.02.2015</a>
           <a href="/policy/">Политика обработки персональных данных</a>
         </div>

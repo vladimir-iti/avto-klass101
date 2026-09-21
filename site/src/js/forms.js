@@ -2,11 +2,8 @@
   'use strict';
 
   // URL веб-приложения Google Apps Script, которое дописывает заявки
-  // в Google-таблицу и шлёт письмо на avto-klass59@mail.ru
+  // в Google-таблицу и шлёт письмо на vick.gali4enko@yandex.ru
   // (см. docs/lead-form-setup.md — инструкция по настройке).
-  // Пока здесь плейсхолдер — форма работает (валидирует, показывает
-  // «Заявка отправлена»), но данные никуда не улетают, пока сюда не
-  // вставить реальный URL.
   var LEAD_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzKQpcxQrOyIkhGwPC4IhPWDYeOHx0Xem3Zxxg_vG-n6LMgg3scZnremm2VRhTmmjfsIw/exec';
 
   /* ---------------------------------------------------------------------

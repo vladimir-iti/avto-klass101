@@ -1,5 +1,6 @@
-# Сборка — генерируется из site/pages + site/src командой `node build.js`.
-# В репозитории не хранится: на Pages её собирает GitHub Actions.
+# Сборка — генерируется из site/pages + site/src командой `node build.js`
+# и выкладывается на хостинг через rsync (см. README). В репозитории
+# не хранится.
 site/dist/
 
 # macOS
