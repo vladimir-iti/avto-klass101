@@ -23,6 +23,7 @@ const PAGES = [
   'tractor/index.html',
   'documents/index.html',
   'policy/index.html',
+  '404.html',
 ];
 
 let errors = 0;
@@ -85,8 +86,17 @@ for (const rel of PAGES) {
     if (!/\balt="/.test(tag)) err(`${rel}: <img> без alt — ${tag.slice(0, 70)}`);
   });
 
-  // --- внутренние ссылки и src ---
-  const refs = [...html.matchAll(/(?:href|src)="(\/[^"]*)"/g)].map((m) => m[1]);
+  // --- внутренние ссылки, src и srcset ---
+  // srcset — это список «путь дескриптор, путь дескриптор», одной общей
+  // регуляркой для атрибутов он не ловится, поэтому разбираем отдельно:
+  // без этого опечатка в адаптивном наборе прошла бы мимо проверки.
+  const srcsetRefs = [...html.matchAll(/\ssrcset="([^"]*)"/g)]
+    .flatMap((m) => m[1].split(','))
+    .map((item) => item.trim().split(/\s+/)[0])
+    .filter((p) => p.startsWith('/'));
+  const refs = [...html.matchAll(/(?:href|src)="(\/[^"]*)"/g)]
+    .map((m) => m[1])
+    .concat(srcsetRefs);
   for (const ref of refs) {
     let clean = ref.split('#')[0].split('?')[0];
     if (BASE_PATH && clean.startsWith(BASE_PATH)) {

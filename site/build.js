@@ -21,6 +21,7 @@ const DIST = path.join(ROOT, 'dist');
 const DOCS_SRC = path.join(ROOT, '..', 'source-materials', 'old-site', '06-dokumenty-pdf');
 const SCANS_SRC = path.join(ROOT, '..', 'source-materials', 'old-site', '05-dokumenty-skany');
 
+const { CONTACTS } = require('./partials/data');
 const header = require('./partials/header');
 const mobileNav = require('./partials/mobileNav');
 const footer = require('./partials/footer');
@@ -60,23 +61,18 @@ const ORG_SCHEMA_BASE = {
   legalName: 'АНО ДПО «Авто-класс»',
   url: SITE_ORIGIN,
   logo: `${SITE_ORIGIN}/images/logo/logo-color-2x.png`,
-  telephone: '+7-342-27-604-05',
-  email: 'avto-klass59@mail.ru',
-  address: [
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'ул. Мира, 75',
-      addressLocality: 'Пермь',
-      addressCountry: 'RU',
-    },
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'ул. Ветлужская, 60/1',
-      addressLocality: 'Пермь',
-      addressCountry: 'RU',
-    },
-  ],
-  sameAs: ['https://vk.com/club105101529'],
+  // Контакты берём из partials/data.js — он заведён как единственный
+  // источник для шапки, подвала и форм. Продублированные здесь значения
+  // при смене телефона молча разошлись бы с остальным сайтом.
+  telephone: CONTACTS.phoneMainHref.replace('tel:', ''),
+  email: CONTACTS.email,
+  address: [CONTACTS.addressMira, CONTACTS.addressVetluzhskaya].map((full) => ({
+    '@type': 'PostalAddress',
+    streetAddress: full.replace(/^г\.\s*Пермь,\s*/, ''),
+    addressLocality: 'Пермь',
+    addressCountry: 'RU',
+  })),
+  sameAs: [CONTACTS.vk],
 };
 
 const PAGES = [
@@ -169,6 +165,18 @@ const PAGES = [
     pageCss: ['category.css'],
     title: 'Документы и лицензия — автошкола «Авто-Класс»',
     description: 'Лицензия на образовательную деятельность, заключение ГИБДД и другие документы автошколы «Авто-Класс» в Перми.',
+    ogImage: '/images/logo/logo-color-2x.png',
+    schema: null,
+    hasForm: false,
+  },
+  {
+    slug: '404',
+    out: '404.html',          // в корне, а не 404/index.html — на него указывает ErrorDocument
+    file: '404.html',
+    activeKey: '',
+    pageCss: [],
+    title: 'Страница не найдена — автошкола «Авто-Класс»',
+    description: 'Такой страницы на сайте автошколы «Авто-Класс» нет. Выберите направление обучения или позвоните нам.',
     ogImage: '/images/logo/logo-color-2x.png',
     schema: null,
     hasForm: false,
@@ -273,10 +281,12 @@ function escapeHtml(value) {
 }
 
 function outPathFor(page) {
+  if (page.out) return path.join(DIST, page.out);
   return page.slug === '' ? path.join(DIST, 'index.html') : path.join(DIST, page.slug, 'index.html');
 }
 
 function canonicalFor(page) {
+  if (page.out) return `${SITE_ORIGIN}/${page.out}`;
   return page.slug === '' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${page.slug}/`;
 }
 
@@ -361,13 +371,54 @@ function build() {
   );
 
   // --- sitemap.xml ---
-  const today = new Date().toISOString().slice(0, 10);
-  const urls = PAGES.map(
-    (p) => `  <url>\n    <loc>${canonicalFor(p)}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`
+  /**
+   * Дата последнего изменения — по времени правки шаблона страницы,
+   * а не по дате сборки. Раньше тут стояло «сегодня» для всех разом,
+   * и каждая пересборка сообщала поисковикам, что изменились все семь
+   * страниц, — сигнал от этого обесценивается.
+   */
+  function lastmodFor(page) {
+    const tpl = path.join(PAGES_DIR, page.file);
+    const stamp = fs.existsSync(tpl) ? fs.statSync(tpl).mtime : new Date();
+    return stamp.toISOString().slice(0, 10);
+  }
+  const urls = PAGES.filter((p) => !p.out).map(
+    (p) => `  <url>\n    <loc>${canonicalFor(p)}</loc>\n    <lastmod>${lastmodFor(p)}</lastmod>\n  </url>`
   ).join('\n');
   fs.writeFileSync(
     path.join(DIST, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
+    'utf8'
+  );
+
+  // --- .htaccess ---
+  // Лежит в сборке, а не правится на сервере руками: иначе выкладка
+  // (rsync --delete) снесёт его при первом же деплое.
+  fs.writeFileSync(
+    path.join(DIST, '.htaccess'),
+    `# Файл генерируется build.js. Правки делать в site/build.js, не на сервере.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# http -> https.
+# Условие только по X-Forwarded-Proto: SSL терминируется на фронте
+# хостинга, и до сайта запрос доходит уже по http, поэтому проверка
+# вида %{HTTPS} off истинна всегда и уводит редирект в бесконечный
+# цикл (так это уже ломалось однажды). Здесь редирект срабатывает,
+# только когда заголовок явно говорит «http»: если он пропадёт,
+# мы просто не редиректим, а не зацикливаемся.
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule ^ ${SITE_ORIGIN}%{REQUEST_URI} [L,R=301]
+
+# www -> без www. Запрос с http://www. уходит на боевой адрес ещё
+# правилом выше, так что лишнего перехода не возникает.
+RewriteCond %{HTTP_HOST} ^www\\. [NC]
+RewriteRule ^ ${SITE_ORIGIN}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+ErrorDocument 404 /404.html
+`,
     'utf8'
   );
 

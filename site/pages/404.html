@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+{{HEAD_COMMON}}
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="{{CANONICAL}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{TITLE}}" />
+  <meta property="og:description" content="{{DESCRIPTION}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:url" content="{{OG_URL}}" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  {{HEADER}}
+  {{MOBILE_NAV}}
+
+  <main id="main">
+    <section class="hero is-compact">
+      <div class="container" style="max-width:720px">
+        <div class="hero__content reveal is-visible" style="max-width:none">
+          <span class="eyebrow">Страница не найдена</span>
+          <h1 class="hero__title" style="font-size:var(--fs-h2)">Такой страницы на сайте нет</h1>
+          <p class="hero__desc">Возможно, в адресе опечатка или страница была перемещена. Выберите направление обучения или позвоните — подскажем.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn-primary btn-lg" href="/">На главную</a>
+            <a class="btn btn-outline btn-lg" href="tel:+73422760405">{{ICON_PHONE}} +7 (342) 27-604-05</a>
+          </div>
+
+          <div class="hero__meta" style="margin-top:4px">
+            <span class="hero__meta-item">{{ICON_ARROW}} <a href="/category-b/">Категория B</a></span>
+            <span class="hero__meta-item">{{ICON_ARROW}} <a href="/category-a/">Категория A</a></span>
+            <span class="hero__meta-item">{{ICON_ARROW}} <a href="/professional/">C · D · BE · CE · DE</a></span>
+            <span class="hero__meta-item">{{ICON_ARROW}} <a href="/tractor/">Тракторная техника</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {{FOOTER}}
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
