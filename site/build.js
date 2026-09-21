@@ -28,6 +28,7 @@ const footer = require('./partials/footer');
 const headCommon = require('./partials/headCommon');
 const icons = require('./partials/icons');
 const priceBlock = require('./partials/priceBlock');
+const documentsList = require('./partials/documentsList');
 const intakeBadge = require('./partials/intakeBadge');
 
 const ICON_TOKENS = {
@@ -162,7 +163,7 @@ const PAGES = [
     slug: 'documents',
     file: 'documents.html',
     activeKey: '',
-    pageCss: ['category.css'],
+    pageCss: ['documents.css'],
     title: 'Документы и лицензия — автошкола «Авто-Класс»',
     description: 'Лицензия на образовательную деятельность, заключение ГИБДД и другие документы автошколы «Авто-Класс» в Перми.',
     ogImage: '/images/logo/logo-color-2x.png',
@@ -208,6 +209,36 @@ function copyDir(from, to) {
     const d = path.join(to, entry.name);
     if (entry.isDirectory()) copyDir(s, d);
     else fs.copyFileSync(s, d);
+  }
+}
+
+/** Где лежит исходник документа: сканы отдельно от PDF-подборки. */
+function documentSource(file) {
+  return file.startsWith('scans/')
+    ? path.join(SCANS_SRC, file.slice('scans/'.length))
+    : path.join(DOCS_SRC, file);
+}
+
+function documentSize(file) {
+  const src = documentSource(file);
+  return fs.existsSync(src) ? fs.statSync(src).size : null;
+}
+
+/**
+ * Копирует только те документы, что перечислены в partials/documentsList.js.
+ * Раньше сюда уезжали оба каталога целиком — 47 файлов, из которых 38
+ * не были связаны ни с одной страницей и просто лежали на хостинге.
+ */
+function copyDocuments() {
+  for (const file of documentsList.allFiles()) {
+    const src = documentSource(file);
+    if (!fs.existsSync(src)) {
+      console.warn('WARN: документ не найден —', file);
+      continue;
+    }
+    const dest = path.join(DIST, 'documents', 'files', file);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.copyFileSync(src, dest);
   }
 }
 
@@ -300,8 +331,7 @@ function build() {
   copyDir(path.join(SRC, 'fonts'), path.join(DIST, 'fonts'));
   copyDir(path.join(SRC, 'images'), path.join(DIST, 'images'));
   copyDir(path.join(SRC, 'video'), path.join(DIST, 'video'));
-  copyDir(DOCS_SRC, path.join(DIST, 'documents', 'files'));
-  copyDir(SCANS_SRC, path.join(DIST, 'documents', 'files', 'scans'));
+  copyDocuments();
 
   fs.copyFileSync(path.join(SRC, 'images', 'logo', 'favicon.ico'), path.join(DIST, 'favicon.ico'));
 
@@ -331,6 +361,7 @@ function build() {
       '{{MOBILE_NAV}}': mobileNav(page.hasForm !== false),
       '{{FOOTER}}': footer(),
       '{{PRICE_BLOCK}}': page.priceHours ? priceBlock({ hours: page.priceHours }) : '',
+      '{{DOCUMENTS_LIST}}': documentsList(documentSize),
       '{{INTAKE_AUTO}}': intakeBadge('auto'),
       '{{INTAKE_TRACTOR}}': intakeBadge('tractor'),
       '{{INTAKE_MOTO}}': intakeBadge('moto'),

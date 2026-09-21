@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Страница «Сведения об образовательной организации»
+   ========================================================================== */
+
+/* Шапка страницы — обычная секция, а не hero: первый экран здесь
+   не нужен, это справочная страница, и целый экран под заголовок
+   только отодвигал бы список документов. */
+.docs-head {
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(28px, 3vw, 40px);
+}
+
+.docs-container { max-width: 880px; }
+
+.docs-title { margin-top: 14px; font-size: var(--fs-h2); }
+
+/* --- навигация по подразделам --- */
+.docs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.docs-nav__link {
+  padding: 7px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.docs-nav__link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+/* --- подраздел --- */
+.docs-section { margin-bottom: clamp(36px, 4vw, 56px); }
+.docs-section:last-of-type { margin-bottom: 0; }
+
+/* Отступ сверху — чтобы при переходе по якорю заголовок не уезжал
+   под фиксированную шапку. */
+.docs-section__title {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-h4);
+}
+
+.docs-list { list-style: none; margin: 0; padding: 0; }
+
+.docs-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.docs-item:last-child { border-bottom: none; }
+
+.docs-item__title {
+  flex: 1 1 320px;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+
+/* Файлы одного документа: устав и лицензия — это несколько листов,
+   поэтому ссылок в строке может быть много. */
+.docs-item__files { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.docs-file {
+  flex: none;
+  padding: 4px 11px;
+  border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+  border-radius: var(--radius-pill);
+  background: rgba(var(--color-accent-rgb), 0.07);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-accent-ink);
+  white-space: nowrap;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.docs-file:hover {
+  background: rgba(var(--color-accent-rgb), 0.16);
+  border-color: var(--color-accent);
+}
+
+.docs-note {
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+.docs-note a { color: var(--color-accent-text); font-weight: 600; }
+
+@media (max-width: 560px) {
+  .docs-item { padding: 12px 0; }
+  .docs-item__title { flex-basis: 100%; }
+  .docs-nav { gap: 6px; }
+  .docs-nav__link { padding: 6px 12px; font-size: var(--fs-micro); }
+}
