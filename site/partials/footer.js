@@ -27,14 +27,14 @@ function footer() {
         </div>
 
         <div class="footer-col">
-          <h2>Направления</h2>
+          <span class="footer-col__title">Направления</span>
           <ul>
             ${dirLinks}
           </ul>
         </div>
 
         <div class="footer-col">
-          <h2>Информация</h2>
+          <span class="footer-col__title">Информация</span>
           <ul>
             <li><a href="/#about">Об автошколе</a></li>
             <li><a href="/#instructors">Инструкторы</a></li>
@@ -45,7 +45,7 @@ function footer() {
         </div>
 
         <div class="footer-col">
-          <h2>Контакты</h2>
+          <span class="footer-col__title">Контакты</span>
           <div class="footer-branches">
             <div class="footer-branch">
               <strong>${CONTACTS.addressMira}</strong>

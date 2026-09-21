@@ -222,7 +222,10 @@ body.nav-open { overflow: hidden; }
 }
 .footer-social:hover { border-color: var(--color-accent-strong); background: rgba(var(--color-accent-rgb), .14); }
 
-.footer-col h2 {
+/* Заголовки колонок подвала — не H2: они повторяются на каждой странице
+   и засоряли бы структуру заголовков документа. Визуально не меняется. */
+.footer-col__title {
+  display: block;
   font-size: var(--fs-micro);
   text-transform: uppercase;
   letter-spacing: var(--ls-tag);

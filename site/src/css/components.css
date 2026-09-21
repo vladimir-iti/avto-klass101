@@ -809,3 +809,21 @@
 }
 .perk__title { font-weight: 700; }
 .perk__desc { color: var(--color-text-secondary); font-size: var(--fs-small); }
+
+/* --- Форма без JavaScript -------------------------------------------------
+   Отправка формы целиком на скрипте: у неё нет action, поэтому без JS
+   сабмит ушёл бы GET-запросом на ту же страницу и заявка потерялась бы
+   молча. Поэтому при отключённом JS поля скрываются, а вместо них
+   показывается телефон. Класс no-js стоит на <html> в разметке и
+   снимается скриптом при загрузке. */
+.no-js .form-fields,
+.no-js .form-success-panel { display: none; }
+
+.form-noscript {
+  margin: 0;
+  padding: 22px 24px;
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+}
+.form-noscript a { color: var(--color-accent-text); font-weight: 700; white-space: nowrap; }
